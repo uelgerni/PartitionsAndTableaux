@@ -9,23 +9,27 @@ basic tableaux class for multiplication
 
 class Tableaux(arr):
 
-    def __new__(cls, input_array):
+
+    def __new__(cls, input_array): # creating an ndarray from a list or similar object and casting it to Tableaux type
         # print('In __new__ with class %s' % cls)
         obj = np.asarray(input_array).view(cls)
         return obj
 
-    def __array_finalize__(self, obj):
-        # see InfoArray.__array_finalize__ for comments
-        if obj is None: return
-        self.info = getattr(obj, 'info', None)
-
     def __mul__(self, other):  # carries out Multiplication of tableaux using the sliding operation
 
-        # a = [self]
-        # b[i] =
-        c = (-1) * np.ones((len(other), len(self.T)))
-        d = np.zeros((len(self), len(other.T)))
-        e = np.concatenate((np.concatenate((c, other), axis=1), np.concatenate((self, d), axis=1)),
+    # transforming self, other to be the correct shape for the algorithm
+        a = np.asarray([self])
+        print(a)
+        b = []
+
+        for i in other:
+            b.append([i])
+        b = np.asarray(b)
+
+        print(b)
+        c = (-1) * np.ones((len(b), len(a.T)))
+        d = np.zeros((len(a), len(b.T)))
+        e = np.concatenate((np.concatenate((c, b), axis=1), np.concatenate((a, d), axis=1)),
                            axis=0)  # constructs skewtableau from a and b as explaint in W.Fultons book
         stableau = np.concatenate((np.concatenate((e, np.zeros((len(e), 2))), axis=1), np.zeros((2, len(e.T) + 2))),
                                   axis=0)  # adds two rows and columns of zeros to avoid indexerror in sliding
@@ -38,8 +42,7 @@ class Tableaux(arr):
         return stableau
 
 
-
-a = Tableaux([[1, 5, 3,5]])
-b = Tableaux(([[1], [4], [3]]))
+a = Tableaux([1, 5, 3, 5])
+b = Tableaux(([1, 4, 3]))
 c = a * b
 print(c)
