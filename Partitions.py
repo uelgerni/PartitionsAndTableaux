@@ -7,6 +7,9 @@ def partitionGenerator(n, offset=1):
 
 
 
-partitions = sorted(partitionGenerator(20), reverse=True)
-for p in partitions:
+#partitions = sorted(partitionGenerator(5), reverse=True)
+#for p in partitions:
+#    print(p)
+
+for p in partitionGenerator(8):
     print(p)

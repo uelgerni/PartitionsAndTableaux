@@ -3,7 +3,7 @@ import numpy as np
 
 
 
-def diagramm(partition):
+def diagramm(partition):        #returns the young diagram correspnding to given partition
     a = len(partition)
     b = partition[0]
 
@@ -11,7 +11,7 @@ def diagramm(partition):
     for x in range(a):
         for y in range(partition[x]):
             diagram[x][y] = 1
-    return diagram
+    return (-1)*diagram
 
 
 

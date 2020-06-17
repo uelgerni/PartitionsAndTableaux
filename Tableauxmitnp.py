@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def TableauxGenerator(diagram, max, liste=[(0, 0)], next=2):
+def TableauxGenerator(diagram, max, liste=[(0, 0)], next=2):                #recursive generator that gives all tableaux corresponding to a Young diagram, needs number of boxes in diagram as max
     diagram[0][0] = 1
 
     if next > max:
@@ -18,25 +18,38 @@ def TableauxGenerator(diagram, max, liste=[(0, 0)], next=2):
                                 yield k
 
 
-def diegramprep(d):
-    diagram = np.concatenate((np.concatenate((d,np.zeros((len(d),2))),axis=1),np.zeros((2,len(d.T)+2))),axis=0)     #add rows and columns with zeros
-    max = (-1)*np.sum(diagram)
+def diagramprep(d):                                                                                                  #prepares diagram for TableauxGenerator
+    diagram = np.concatenate((np.concatenate((d,np.zeros((len(d),2))),axis=1),np.zeros((2,len(d.T)+2))),axis=0)     #adds rows and columns with zeros
+    max = (-1)*np.sum(diagram)                                                                                      #calculates max (number of boxes)
     return (diagram,max)
 
-def tableaux(d):
-    diagram=diegramprep(d)
+def diagramm(partition):    #returns Youngdiagram corresponding to partition
+    a = len(partition)
+    b = partition[0]
+
+    diagram = np.zeros((a, b))
+    for x in range(a):
+        for y in range(partition[x]):
+            diagram[x][y] = 1
+    return (-1)*diagram
+
+
+def tableaux(p):        #generator that yields all the tableaux corresponding to a Partition
+    d = diagramm(p)
+    diagram=diagramprep(d)
     for p in TableauxGenerator(diagram[0], diagram[1]):
-        p = np.delete(p, (-1), axis=1)
+        p = np.delete(p, (-1), axis=1)              #deletes columns and rows with zeros
         p = np.delete(p, (-1), axis=0)
         p = np.delete(p, (-1), axis=1)
         p = np.delete(p, (-1), axis=0)
-        print(p)
+        yield(p)
 
 
 
-
+p=(4, 2, 1, 1)
 
 
 diagram = np.array([[-1, -1 ], [-1, 0 ]])
 
-tableaux(diagram)
+for i in tableaux(p):
+    print(i)

@@ -1,9 +1,9 @@
 import numpy as np
 
 
-def TableauxGenerator(diagram, max, liste=[(0, 0)], next=2):
-    diagram[0][0] = 1
-
+def TableauxGenerator(diagram, max, liste=[(0, 0)], next=2):    #alternative way to find young tableaux to diagram, uses lists instead of ndarrays
+    diagram[0][0] = 1                                            #this takes less space in the output window, but everything alse is done with nparrays and the output is a little harder to read
+                                                                # also needs to be given number of boxes
     if next > max:
         yield diagram
     else:
@@ -21,7 +21,7 @@ def TableauxGenerator(diagram, max, liste=[(0, 0)], next=2):
 
 
 
-diagram = [[-1, -1, 0, 0], [-1, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]
+diagram = [[-1, -1, -1, -1], [-1, -1, -1, 0], [-1, -1, 0, 0], [0, 0, 0, 0]]
 
-for p in TableauxGenerator(diagram, 3):
+for p in TableauxGenerator(diagram, 9):
     print(p)
