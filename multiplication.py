@@ -15,8 +15,8 @@ def mult(a,b):          #carries out Multiplication of tableaux using the slidin
     return stableau
 
 
-a = np.array([[1,2,3]])
-b = np.array(([[1],[2],[3]]))
+a = np.array([[1,5,3,5]])
+b = np.array(([[1],[4],[3]]))
 
 c=mult(a,b)
 print (c)
