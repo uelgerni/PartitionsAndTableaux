@@ -1,4 +1,5 @@
 from Sliding import *
+from rowinsertion import *
 
 arr = np.ndarray
 
@@ -24,10 +25,8 @@ class Tableaux(arr):
                                   axis=0)  # adds two rows and columns of zeros to avoid indexerror in sliding
         while stableau[0][0] == -1:  # does sliding operation until the result is a youngtableau
             stableau = np.copy(Sliding(stableau))
-        stableau = np.delete(stableau, (-1), axis=1)
-        stableau = np.delete(stableau, (-1), axis=0)
-        stableau = np.delete(stableau, (-1), axis=1)
-        stableau = np.delete(stableau, (-1), axis=0)  # deletes rows and columns of zeros
+        stableau = deleteemptyrows((stableau))
+        stableau = deleteemptycols(stableau)   # deletes rows and columns of zeros
         return stableau
 
 
