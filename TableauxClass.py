@@ -48,7 +48,7 @@ class Tableaux(arr):
                                         if stableau[i][j + 1] == 0 or j == len(stableau.T):
                                             stableau[i][j] = 0
                                             break
-                            stableau.view(Tableaux)
+                            stableau = stableau.view(Tableaux)
                             return stableau
 
     def savesliding(self):
@@ -56,14 +56,15 @@ class Tableaux(arr):
             return self
         result = np.concatenate(
             (np.concatenate((self, np.zeros((len(self), 2))), axis=1), np.zeros((2, len(self.T) + 2))), axis=0)
-        result.view(Tableaux)
+        result = result.view(Tableaux)
         result = result.sliding()
         result = result.deleteemptyrows()
         result = result.deleteemptycols()
         return result
 
-    def rowinsertion(self,
-                     newentry):  # carries out row insertion operation as defined in W. Fultons book, if the matrix reprsesntion of the tableau has enough rows and columns
+    def rowinsertion(self,newentry):
+        # carries out row insertion operation as defined in W. Fultons book, iff the matrix reprsesntion of the tableau has enough rows and columns
+        # so better use saverowinsertion
         tableau = self
         k = 0
         for i in range(len(tableau)):
@@ -79,8 +80,8 @@ class Tableaux(arr):
                         break
             if k == 1:
                 break
-        tableau.view(Tableaux)
-        return (tableau, (i, j))
+        tableau = tableau.view(Tableaux)
+        return tableau, (i, j)
 
     def deleteemptyrows(self):  # deletes every row in a matrix that only has zeros in it
         tableau = self
@@ -92,7 +93,7 @@ class Tableaux(arr):
             else:
                 tableau = np.delete(tableau, (i - k), axis=0)
                 k = k + 1
-        tableau.view(Tableaux)
+        tableau = tableau.view(Tableaux)
         return tableau
 
     def deleteemptycols(self):  # deletes every column in a matrix that only has zeros in it
@@ -105,13 +106,13 @@ class Tableaux(arr):
             else:
                 tableau = np.delete(tableau, (j - k), axis=1)
                 k = k + 1
-        tableau.view(Tableaux)
+        tableau = tableau.view(Tableaux)
         return tableau
 
     def saverowinsertion(self, newentry):  # does rowinsertion for every tableau using rowinsertion function and deletes empty rows and columns
         tableau = self
         tableau = np.concatenate((np.concatenate((tableau, np.zeros((len(tableau), 1))), axis=1), np.zeros((1, len(tableau.T) + 1))), axis=0)
-        tableau.view(Tableaux)
+        tableau = tableau.view(Tableaux)
         (tableau, newbox) = tableau.rowinsertion(newentry)
         tableau = tableau.deleteemptyrows()
         tableau = tableau.deleteemptycols()
@@ -123,7 +124,7 @@ class Tableaux(arr):
         d = np.zeros((len(self), len(other.T)))
         e = np.concatenate((np.concatenate((c, other), axis=1), np.concatenate((self, d), axis=1)), axis=0)  # constructs skewtableau from a and b as explaint in W.Fultons book
         stableau = np.concatenate((np.concatenate((e, np.zeros((len(e), 2))), axis=1), np.zeros((2, len(e.T) + 2))), axis=0)  # adds two rows and columns of zeros to avoid indexerror in sliding
-        stableau.view(Tableaux)
+        stableau = stableau.view(Tableaux)
         while stableau[0][0] == -1:  # does sliding operation until the result is a youngtableau
             stableau = Tableaux.copy(stableau.sliding())
         stableau = stableau.deleteemptyrows()
@@ -134,5 +135,7 @@ class Tableaux(arr):
 a = Tableaux([[1, 3, 3, 5], [1, 2, 0, 0]])
 b = Tableaux([[1, 2, 3]])
 c = a * b
-# c=a.savesliding()
 print(c)
+
+d = c.saverowinsertion(3)
+print(d[0])

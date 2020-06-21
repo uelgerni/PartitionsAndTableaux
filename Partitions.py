@@ -1,15 +1,28 @@
-# really fast algorithm because it only has to calculate each partition once, including each sub partition.
-# as in: if you do the partition for 6 it only calculates the partition for 4 once
-# and gives it back for every case where its needed
+# this works by the following method:
+# first it yields the trivial partition of the number itself,
+# then it yields all the partitions with a 1 at the end by calculating all the partitions of n-1 and appending 1
+# then the same for n-2 and appending a 2 etc etc
+# you can easily see this if you dont sort the partitions you get back
 
 
 def partitionGenerator(n, offset=1):
-    yield n,
+    yield n,  # yield a list
     for i in range(offset, n // 2 + 1):  # going farther would give for example (1,4) in addition to (4,1)
-        for p in partitionGenerator(n - i, i):
-            yield p + (i,)
+        for partition in partitionGenerator(n - i, i):
+            yield partition + (i,)  # yield partition for n-rest, append rest
 
 
-partitions = sorted(partitionGenerator(50), reverse=True)
-for partition in partitions:
-    print(partition)
+def partitionPrinter(partitions):
+    for partition in partitions:  # this is to get the the first result in our generator function which corresponds to n
+        number = str(partition[0]) + " = "
+        break
+    for partition in partitions:
+        result = number
+        for i in range(len(partition) - 1):
+            result += (str(partition[i]) + " + ")
+        result += str(partition[-1])
+        print(result)
+
+
+# partitionPrinter(sorted(partitionGenerator(13), reverse=True))
+partitionPrinter(partitionGenerator(13))
