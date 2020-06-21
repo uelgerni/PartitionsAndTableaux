@@ -10,5 +10,5 @@ def partitionGenerator(n, offset=1):
 # for p in partitions:
 #    print(p)
 
-for p in partitionGenerator(8):
-    print(p)
+for partition in partitionGenerator(8):
+    print(partition)

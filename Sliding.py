@@ -1,8 +1,7 @@
 import numpy as np
 
 
-def Sliding(
-        stableau):  # does the basic operation Sliding of a skewtableau, needs enough rows and columns with yeros to work
+def Sliding(stableau):  # does the basic operation Sliding of a skewtableau, needs enough rows and columns with yeros to work
     for i in range(len(stableau)):
         for j in range(len(stableau.T)):
             if stableau[i][j] == -1:

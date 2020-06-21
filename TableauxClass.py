@@ -111,8 +111,7 @@ class Tableaux(arr):
         tableau = Tableaux(tableau)
         return tableau
 
-    def saverowinsertion(self,
-                         newentry):  # does rowinsertion for every tableau using rowinsertion function and deletes empty rows and columns
+    def saverowinsertion(self, newentry):  # does rowinsertion for every tableau using rowinsertion function and deletes empty rows and columns
         tableau = self
         tableau = np.concatenate(
             (np.concatenate((tableau, np.zeros((len(tableau), 1))), axis=1), np.zeros((1, len(tableau.T) + 1))), axis=0)
@@ -139,8 +138,8 @@ class Tableaux(arr):
         stableau = stableau.deleteemptycols()  # deletes rows and columns of zeros
         return stableau
 
-# a = Tableaux([[1, 3, 3, 5],[1,2,0,0]])
-# b = Tableaux([[1,2,3]])
-# c = a * b
-# c=a.savesliding()
-# print (c)
+#a = Tableaux([[1, 3, 3, 5],[1,2,0,0]])
+#b = Tableaux([[1,2,3]])
+#c = a * b
+#c=a.savesliding()
+#print (c)
