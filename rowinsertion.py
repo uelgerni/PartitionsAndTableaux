@@ -1,8 +1,7 @@
 import numpy as np
 
 
-def rowinsertion(tableau,
-                 newentry):  # carries out row insertion operation as defined in W. Fultons book, if the matrix reprsesntion of the tableau has enough rows and columns
+def rowinsertion(tableau, newentry):  # carries out row insertion operation as defined in W. Fultons book, if the matrix reprsesntion of the tableau has enough rows and columns
     k = 0
     for i in range(len(tableau)):
         for j in range(len(tableau.T)):
@@ -17,7 +16,7 @@ def rowinsertion(tableau,
                     break
         if k == 1:
             break
-    return (tableau, (i, j))
+    return tableau, (i, j)
 
 
 def deleteemptyrows(tableau):  # deletes every row in a matrix that only has zeros in it
@@ -44,8 +43,7 @@ def deleteemptycols(tableau):  # deletes every column in a matrix that only has 
     return tableau
 
 
-def saverowinsertion(tableau,
-                     newentry):  # does rowinsertion for every tableau using rowinsertion function and deletes empty rows and columns
+def saverowinsertion(tableau, newentry):  # does rowinsertion for every tableau using rowinsertion function and deletes empty rows and columns
     tableau = np.concatenate(
         (np.concatenate((tableau, np.zeros((len(tableau), 1))), axis=1), np.zeros((1, len(tableau.T) + 1))), axis=0)
     (tableau, newbox) = rowinsertion(tableau, newentry)
