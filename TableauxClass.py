@@ -126,10 +126,8 @@ class Tableaux(arr):
 
         c = (-1) * np.ones((len(other), len(self.T)))
         d = np.zeros((len(self), len(other.T)))
-        e = np.concatenate((np.concatenate((c, other), axis=1), np.concatenate((self, d), axis=1)),
-                           axis=0)  # constructs skewtableau from a and b as explaint in W.Fultons book
-        stableau = np.concatenate((np.concatenate((e, np.zeros((len(e), 2))), axis=1), np.zeros((2, len(e.T) + 2))),
-                                  axis=0)  # adds two rows and columns of zeros to avoid indexerror in sliding
+        e = np.concatenate((np.concatenate((c, other), axis=1), np.concatenate((self, d), axis=1)), axis=0)  # constructs skewtableau from a and b as explaint in W.Fultons book
+        stableau = np.concatenate((np.concatenate((e, np.zeros((len(e), 2))), axis=1), np.zeros((2, len(e.T) + 2))), axis=0)  # adds two rows and columns of zeros to avoid indexerror in sliding
         s = stableau.tolist()
         stableau = Tableaux(s)
         while stableau[0][0] == -1:  # does sliding operation until the result is a youngtableau
