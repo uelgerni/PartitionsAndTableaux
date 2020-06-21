@@ -1,3 +1,4 @@
+from rowinsertion import *
 from TableauxClass import *
 
 def SchenstedAlgorithm(S):                  #Schensted algorithm as explaint in Wikipedia article "Robinson-Schensted correspondence"
