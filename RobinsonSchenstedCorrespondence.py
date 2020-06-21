@@ -13,10 +13,9 @@ def SchenstedAlgorithm(S):  # Schensted algorithm as explaint in Wikipedia artic
         b = deleteemptycols(b)
         b = deleteemptyrows(b)
         k = k + 1
-    a.tolist()
-    b.tolist()
-    a = Tableaux(a)
-    b = Tableaux(b)
+    a.view(Tableaux)
+    b.view(Tableaux)
+    print(type(a))
     return [a, b]
 
 

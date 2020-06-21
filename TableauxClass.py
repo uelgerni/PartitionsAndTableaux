@@ -3,14 +3,16 @@ import numpy as np
 arr = np.ndarray
 
 """
-basic tableaux class for multiplication
+basic tableaux class for multiplication with *
+includes all the basic operations needed
+
+where needed those functions now also have a cast to tableaux inside
 """
 
 
 class Tableaux(arr):
 
     def __new__(cls, input_array):  # creating an ndarray from a list or similar object and casting it to Tableaux type
-        # print('In __new__ with class %s' % cls)
         obj = np.asarray(input_array).view(cls)
         return obj
 
@@ -46,8 +48,7 @@ class Tableaux(arr):
                                         if stableau[i][j + 1] == 0 or j == len(stableau.T):
                                             stableau[i][j] = 0
                                             break
-                            stableau = stableau.tolist()
-                            stableau = Tableaux(stableau)
+                            stableau.view(Tableaux)
                             return stableau
 
     def savesliding(self):
@@ -55,8 +56,7 @@ class Tableaux(arr):
             return self
         result = np.concatenate(
             (np.concatenate((self, np.zeros((len(self), 2))), axis=1), np.zeros((2, len(self.T) + 2))), axis=0)
-        result = result.tolist()
-        result = Tableaux(result)
+        result.view(Tableaux)
         result = result.sliding()
         result = result.deleteemptyrows()
         result = result.deleteemptycols()
@@ -79,8 +79,7 @@ class Tableaux(arr):
                         break
             if k == 1:
                 break
-        tableau = tableau.tolist()
-        tableau = Tableaux(tableau)
+        tableau.view(Tableaux)
         return (tableau, (i, j))
 
     def deleteemptyrows(self):  # deletes every row in a matrix that only has zeros in it
@@ -93,8 +92,7 @@ class Tableaux(arr):
             else:
                 tableau = np.delete(tableau, (i - k), axis=0)
                 k = k + 1
-        tableau = tableau.tolist()
-        tableau = Tableaux(tableau)
+        tableau.view(Tableaux)
         return tableau
 
     def deleteemptycols(self):  # deletes every column in a matrix that only has zeros in it
@@ -107,16 +105,13 @@ class Tableaux(arr):
             else:
                 tableau = np.delete(tableau, (j - k), axis=1)
                 k = k + 1
-        tableau = tableau.tolist()
-        tableau = Tableaux(tableau)
+        tableau.view(Tableaux)
         return tableau
 
     def saverowinsertion(self, newentry):  # does rowinsertion for every tableau using rowinsertion function and deletes empty rows and columns
         tableau = self
-        tableau = np.concatenate(
-            (np.concatenate((tableau, np.zeros((len(tableau), 1))), axis=1), np.zeros((1, len(tableau.T) + 1))), axis=0)
-        tableau = tableau.tolist()
-        tableau = Tableaux(tableau)
+        tableau = np.concatenate((np.concatenate((tableau, np.zeros((len(tableau), 1))), axis=1), np.zeros((1, len(tableau.T) + 1))), axis=0)
+        tableau.view(Tableaux)
         (tableau, newbox) = tableau.rowinsertion(newentry)
         tableau = tableau.deleteemptyrows()
         tableau = tableau.deleteemptycols()
@@ -128,16 +123,16 @@ class Tableaux(arr):
         d = np.zeros((len(self), len(other.T)))
         e = np.concatenate((np.concatenate((c, other), axis=1), np.concatenate((self, d), axis=1)), axis=0)  # constructs skewtableau from a and b as explaint in W.Fultons book
         stableau = np.concatenate((np.concatenate((e, np.zeros((len(e), 2))), axis=1), np.zeros((2, len(e.T) + 2))), axis=0)  # adds two rows and columns of zeros to avoid indexerror in sliding
-        s = stableau.tolist()
-        stableau = Tableaux(s)
+        stableau.view(Tableaux)
         while stableau[0][0] == -1:  # does sliding operation until the result is a youngtableau
             stableau = Tableaux.copy(stableau.sliding())
         stableau = stableau.deleteemptyrows()
         stableau = stableau.deleteemptycols()  # deletes rows and columns of zeros
         return stableau
 
-#a = Tableaux([[1, 3, 3, 5],[1,2,0,0]])
-#b = Tableaux([[1,2,3]])
-#c = a * b
-#c=a.savesliding()
-#print (c)
+
+a = Tableaux([[1, 3, 3, 5], [1, 2, 0, 0]])
+b = Tableaux([[1, 2, 3]])
+c = a * b
+# c=a.savesliding()
+print(c)
