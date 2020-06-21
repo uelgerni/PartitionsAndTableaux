@@ -5,9 +5,7 @@ def partitionGenerator(n, offset=1):
         for p in partitionGenerator(n - i, i):
             yield p + (i,)
 
-partitions = sorted(partitionGenerator(50), reverse=True)
-# for p in partitions:
-#    print(p)
 
+partitions = sorted(partitionGenerator(50), reverse=True)
 for partition in partitions:
     print(partition)
