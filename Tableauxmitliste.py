@@ -18,9 +18,6 @@ def TableauxGenerator(diagram, max, liste=[(0, 0)], next=2):    #alternative way
                                 yield k
 
 
-
-
-
 diagram = [[-1, -1, -1, -1], [-1, -1, -1, 0], [-1, -1, 0, 0], [0, 0, 0, 0]]
 
 for p in TableauxGenerator(diagram, 9):

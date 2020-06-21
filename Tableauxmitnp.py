@@ -2,7 +2,8 @@ import numpy as np
 from TableauxClass import Tableaux
 
 
-def TableauxGenerator(diagram, max, liste=[(0, 0)], next=2):                #recursive generator that gives all tableaux corresponding to a Young diagram, needs number of boxes in diagram as max
+def TableauxGenerator(diagram, max, liste=[(0, 0)],
+                      next=2):  # recursive generator that gives all tableaux corresponding to a Young diagram, needs number of boxes in diagram as max
     diagram[0][0] = 1
 
     if next > max:
@@ -19,12 +20,14 @@ def TableauxGenerator(diagram, max, liste=[(0, 0)], next=2):                #rec
                                 yield k
 
 
-def diagramprep(d):                                                                                                  #prepares diagram for TableauxGenerator
-    diagram = np.concatenate((np.concatenate((d,np.zeros((len(d),2))),axis=1),np.zeros((2,len(d.T)+2))),axis=0)     #adds rows and columns with zeros
-    max = (-1)*np.sum(diagram)                                                                                      #calculates max (number of boxes)
-    return (diagram,max)
+def diagramprep(d):  # prepares diagram for TableauxGenerator
+    diagram = np.concatenate((np.concatenate((d, np.zeros((len(d), 2))), axis=1), np.zeros((2, len(d.T) + 2))),
+                             axis=0)  # adds rows and columns with zeros
+    max = (-1) * np.sum(diagram)  # calculates max (number of boxes)
+    return (diagram, max)
 
-def diagramm(partition):    #returns Youngdiagram corresponding to partition
+
+def diagramm(partition):  # returns Youngdiagram corresponding to partition
     a = len(partition)
     b = partition[0]
 
@@ -35,24 +38,22 @@ def diagramm(partition):    #returns Youngdiagram corresponding to partition
     return diagram
 
 
-def tableaux(p):        #generator that yields all the tableaux corresponding to a Partition
+def tableaux(p):  # generator that yields all the tableaux corresponding to a Partition
     d = diagramm(p)
-    diagram=diagramprep(d)
+    diagram = diagramprep(d)
     for p in TableauxGenerator(diagram[0], diagram[1]):
-        p = np.delete(p, (-1), axis=1)              #deletes columns and rows with zeros
+        p = np.delete(p, (-1), axis=1)  # deletes columns and rows with zeros
         p = np.delete(p, (-1), axis=0)
         p = np.delete(p, (-1), axis=1)
         p = np.delete(p, (-1), axis=0)
         p.tolist()
         p = Tableaux(p)
-        yield(p)
+        yield (p)
 
 
+p = (4, 2, 1, 1)
 
-p=(4, 2, 1, 1)
-
-
-diagram = np.array([[-1, -1 ], [-1, 0 ]])
+diagram = np.array([[-1, -1], [-1, 0]])
 
 for i in tableaux(p):
     print(i)
