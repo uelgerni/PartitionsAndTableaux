@@ -1,12 +1,12 @@
 import numpy as np
 
-def Sliding(stableau):                      #does the basic operation Sliding of a skewtableau
+def Sliding(stableau):                      #does the basic operation Sliding of a skewtableau, needs enough rows and columns with yeros to work
     for i in range(len(stableau)):
         for j in range(len(stableau.T)):
             if stableau[i][j]==-1:
                 if i == len(stableau) or stableau[i+1][j]!=-1 :
                     if j == len(stableau.T) or stableau[i][j+1]!=-1 :           #identifies inside corner of skewtableau
-                        while True:                                             #moves the corner according to sliding operation until it is on the outside
+                        while True:                                             #moves the corner according to sliding operation until it is on the outside, then gives it value 0
                             if stableau[i+1][j]<=stableau[i][j+1] and stableau[i+1][j]!=0:
                                 stableau[i][j]=stableau[i+1][j]
                                 stableau[i+1][j]=-1
@@ -34,7 +34,7 @@ def Sliding(stableau):                      #does the basic operation Sliding of
                         return stableau
 
 
-def savesliding(s):                     # sliding for skewtableaux without zero rows and cols on outside
+def savesliding(s):                     # sliding that works for all skewtableaux
     stableau = np.concatenate((np.concatenate((s,np.zeros((len(s),2))),axis=1),np.zeros((2,len(s.T)+2))),axis=0)
     result = Sliding(stableau)
     result= np.delete(result,(-1),axis=1)

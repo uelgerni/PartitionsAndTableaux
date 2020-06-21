@@ -1,4 +1,5 @@
 import numpy as np
+from TableauxClass import Tableaux
 
 
 def TableauxGenerator(diagram, max, liste=[(0, 0)], next=2):                #recursive generator that gives all tableaux corresponding to a Young diagram, needs number of boxes in diagram as max
@@ -30,8 +31,8 @@ def diagramm(partition):    #returns Youngdiagram corresponding to partition
     diagram = np.zeros((a, b))
     for x in range(a):
         for y in range(partition[x]):
-            diagram[x][y] = 1
-    return (-1)*diagram
+            diagram[x][y] = -1
+    return diagram
 
 
 def tableaux(p):        #generator that yields all the tableaux corresponding to a Partition
@@ -42,6 +43,8 @@ def tableaux(p):        #generator that yields all the tableaux corresponding to
         p = np.delete(p, (-1), axis=0)
         p = np.delete(p, (-1), axis=1)
         p = np.delete(p, (-1), axis=0)
+        p.tolist()
+        p = Tableaux(p)
         yield(p)
 
 

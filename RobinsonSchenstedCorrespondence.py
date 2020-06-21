@@ -1,4 +1,4 @@
-from rowinsertion import *
+from TableauxClass import *
 
 def SchenstedAlgorithm(S):                  #Schensted algorithm as explaint in Wikipedia article "Robinson-Schensted correspondence"
     a=np.array([[]])
@@ -11,6 +11,10 @@ def SchenstedAlgorithm(S):                  #Schensted algorithm as explaint in 
         b = deleteemptycols(b)
         b = deleteemptyrows(b)
         k=k+1
+    a.tolist()
+    b.tolist()
+    a = Tableaux(a)
+    b = Tableaux(b)
     return [a,b]
 
 

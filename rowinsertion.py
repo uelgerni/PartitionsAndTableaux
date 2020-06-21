@@ -30,7 +30,7 @@ def deleteemptyrows(tableau):           #deletes every row in a matrix that only
     return tableau
 
 
-def deleteemptycols(tableau):           #deletes every columns in a matrix that only has zeros in it
+def deleteemptycols(tableau):           #deletes every column in a matrix that only has zeros in it
     k=0
     for j in range(len(tableau.T)):
         for i in range(len(tableau)):
@@ -52,6 +52,6 @@ def saverowinsertion(tableau,newentry):         #does rowinsertion for every tab
 
 #t = np.array([[1,2,3,0,0,0],[2,3,4,0,0,0],[3,4,5,0,0,0],[0,0,0,0,0,0,],[0,0,0,0,0,0,],[0,0,0,0,0,0,],[0,0,0,0,0,0,]])
 
-#print(saverowinsertion(t,2))
+#print(saverowinsertion(t,2)[0])
 
 
