@@ -4,6 +4,8 @@
 # then the same for n-2 and appending a 2 etc etc
 # you can easily see this if you dont sort the partitions you get back
 
+import time
+
 
 def partitionGenerator(n, offset=1):
     yield n,  # yield a list
@@ -24,5 +26,9 @@ def partitionPrinter(partitions):
         print(result)
 
 
+
 # partitionPrinter(sorted(partitionGenerator(13), reverse=True))
-partitionPrinter(partitionGenerator(13))
+# time1 = time.time()
+# list(partitionGenerator(50))
+# time2 = time.time()
+# print("{:.10f}".format(time2 - time1))
