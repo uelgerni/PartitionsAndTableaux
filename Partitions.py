@@ -33,3 +33,6 @@ partitionPrinter(sorted(partitionGenerator(13), reverse=True))
 #time2 = time.time()
 #print("{:.10f}".format(time2 - time1))
 #print(len(numOfPartitions))
+
+
+#list(partitionGenerator(50000))
