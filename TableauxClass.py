@@ -139,5 +139,5 @@ class Tableaux(arr):
 #print(c)
 
 #d = c.saverowinsertion(3)
-#d= r.savesliding()
+#d = r.savesliding()
 #print(d)
