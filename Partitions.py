@@ -27,7 +27,7 @@ def partitionPrinter(partitions):
 
 
 
-partitionPrinter(sorted(partitionGenerator(13), reverse=True))
+#partitionPrinter(sorted(partitionGenerator(13), reverse=True))
 #time1 = time.time()
 #numOfPartitions = list(partitionGenerator(50))
 #time2 = time.time()
