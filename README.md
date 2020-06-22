@@ -6,15 +6,19 @@ a generator that returns all partitions of a given number
 
 a generator that gives all young tableaux to a partition 
 
-a function that does the sliding operation of skewtableaux
-
-a function that can multiply two tableaux
-
-a function that does the row insertion operation
-
 an implementation of the Schensted algorithm
 
 a class for Tableaux
+
+a method that does the sliding operation of skewtableaux
+
+a method that can multiply two tableaux
+
+a method that does the row insertion operation
+
+
+
+
 
 .
 
