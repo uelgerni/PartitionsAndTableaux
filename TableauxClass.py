@@ -132,10 +132,12 @@ class Tableaux(arr):
         return stableau
 
 
-a = Tableaux([[1, 3, 3, 5], [1, 2, 0, 0]])
-b = Tableaux([[1, 2, 3]])
-c = a * b
-print(c)
+#a = Tableaux([[1, 3, 3, 5], [1, 2, 0, 0]])
+#r = Tableaux([[-1, -1, 3, 4], [1, 2, 0, 0]])
+#b = Tableaux([[1, 2, 3]])
+#c = a * b
+#print(c)
 
-d = c.saverowinsertion(3)
-print(d[0])
+#d = c.saverowinsertion(3)
+#d= r.savesliding()
+#print(d)
