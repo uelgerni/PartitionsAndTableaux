@@ -126,17 +126,17 @@ class Tableaux(arr):
         stableau = np.concatenate((np.concatenate((e, np.zeros((len(e), 2))), axis=1), np.zeros((2, len(e.T) + 2))), axis=0)  # adds two rows and columns of zeros to avoid indexerror in sliding
         stableau = stableau.view(Tableaux)
         while stableau[0][0] == -1:  # does sliding operation until the result is a youngtableau
-            stableau = Tableaux.copy(stableau.sliding())
+            stableau = Tableaux.copy(stableau.savesliding())
         stableau = stableau.deleteemptyrows()
         stableau = stableau.deleteemptycols()  # deletes rows and columns of zeros
         return stableau
 
 
-#a = Tableaux([[1, 3, 3, 5], [1, 2, 0, 0]])
+a = Tableaux([[1, 3, 3, 5], [1, 2, 0, 0]])
 #r = Tableaux([[-1, -1, 3, 4], [1, 2, 0, 0]])
-#b = Tableaux([[1, 2, 3]])
-#c = a * b
-#print(c)
+b = Tableaux([[1, 2, 3]])
+c = a * b
+print(c)
 
 #d = c.saverowinsertion(3)
 #d= r.savesliding()
